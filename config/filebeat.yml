@@ -1,0 +1,23 @@
+filebeat.prospectors:
+  - input_type: log
+    paths:
+      - /app/var/logs/*elk.log
+    json.keys_under_root: true
+    json.add_error_key: true
+    json.overwrite_keys: true
+processors:
+  - add_docker_metadata: ~
+  - rename:
+      fields:
+        - from: host
+          to: host_object
+        - from: level
+          to: severity
+      ignore_missing: true
+      fail_on_error: false
+setup.template:
+  enabled: false
+output.elasticsearch:
+  hosts: ["${ELK_URI}"]
+  protocol: https
+  index: "${ELK_INDEX}"

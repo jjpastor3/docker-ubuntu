@@ -1,0 +1,7 @@
+# Symfony aliases
+
+alias dev="/app/bin/console --env=dev"
+alias test="/app/bin/console --env=test"
+alias prod="/app/bin/console --env=prod"
+
+alias nuke="rm -rf /app/var/cache/*; dev d:d:d --force; dev d:d:c; dev d:s:c; dev doctrine:cache:clear-query; dev doctrine:cache:clear-result; dev doctrine:cache:clear-metadata"
